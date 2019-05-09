@@ -4,15 +4,22 @@
   "icon": "icon.png",
   "commands": [
     {
-      "name": "my-command",
+      "name": "Toggle Symbol Overlays",
       "identifier": "symbol-overlay-toggle.my-command-identifier",
-      "script": "./my-command.js"
+      "script": "my-command.js"
     }
   ],
   "menu": {
-    "title": "symbol-overlay-toggle",
+    "title": "Toggle Symbol Overlays",
     "items": [
       "symbol-overlay-toggle.my-command-identifier"
-    ]
-  }
+    ],
+    "isRoot":true
+  },
+  "version": "0.1.0",
+  "description": "",
+  "name": "symbol-overlay-toggle",
+  "identifier": "symbol-overlay-toggle",
+  "disableCocoaScriptPreprocessor": true,
+  "appcast": "https://raw.githubusercontent.com//master/.appcast.xml"
 }
