@@ -17,6 +17,8 @@ for (var a=0;a<document.selectedPage.layers.length;a++){
 function findTheSymbols(layers){
   for(var i=0;i<layers.length;i++){
     if(layers[i].type=='SymbolInstance'){
+      logger('=====================NEW SYMBOL==========================');
+      logger('=========================================================')
       logger('found a symbol named ' + layers[i].name);
       logger('it has ' + layers[i].overrides.length +' overrides');
       for(var j=0;j<layers[i].overrides.length;j++){
@@ -43,7 +45,7 @@ function trackSymbols(symbol, t, oRide){
   //FIND THE MASTER OF THE CURRENT SYMBOL
   var sMaster=symbol.master;
   logger('================================================================================')
-  logger('in trackSymbols function, the master for the passed-in symbol is:')
+  logger('48: in trackSymbols function, the master for the passed-in symbol is:')
   logger(sMaster);
   //GET THE MASTER'S LIBRARY
   var originLibrary=sMaster.getLibrary();
@@ -55,13 +57,13 @@ function trackSymbols(symbol, t, oRide){
   logger('oRide.value:');
   logger(oRide.value);
   if(t=='layerStyle'){
-    logger('58: applying oRide.value to appliedLStyle')
+    logger('60: applying oRide.value to appliedLStyle')
     var appliedLStyle=oRide.value;
     logger(appliedLStyle);
     logger(document.getSharedLayerStyleWithID(appliedLStyle).name);
   } 
   if(t=='textStyle'){
-    logger('64: applying oRide.value to appliedTStyle')
+    logger('66: applying oRide.value to appliedTStyle')
     var appliedTStyle=oRide.value;
   }
   if(oRide.property=='stringValue'){
@@ -70,7 +72,7 @@ function trackSymbols(symbol, t, oRide){
   }
   //since subsequent processing relies on these, ensure at least one of them is defined
   if((appliedTStyle==undefined) && (appliedLStyle==undefined)){
-    logger('73: you found an override with no shared style!');
+    logger('75: you found an override with no shared style!');
     logger('t='+t);
     logger('this is the symbol');
     logger(symbol);
@@ -86,7 +88,7 @@ function trackSymbols(symbol, t, oRide){
   }//close the if undefined block
 
   if(t=='layerStyle'){
-    logger('89: the shared layer style associated with the current value of the current override is:')
+    logger('91: the shared layer style associated with the current value of the current override is:')
     logger(appliedLStyle);
     logger(document.getSharedLayerStyleWithID(appliedLStyle).name);
     //CREATE STORAGE FOR HIDDEN AND SHOWN VARIANTS OF THE STYLE
@@ -114,7 +116,7 @@ function trackSymbols(symbol, t, oRide){
     //LOOK AT THE APPLIED STYLE ON THE SYMBOL YOU'RE WORKING WITH
     if(document.getSharedLayerStyleWithID(appliedLStyle).name==hiddenLayerStyleValue){
       //FLIP INVISIBLE TO OVERLAY
-      logger('117: this is oRide if appliedLStyle.name==invisible');
+      logger('119: this is oRide if appliedLStyle.name==invisible');
       logger(oRide);
       logger('this is shownLayerStyle if appliedLStyle.name==invisible');
       logger(shownLayerStyle);
@@ -123,7 +125,7 @@ function trackSymbols(symbol, t, oRide){
       logger(document.getSharedLayerStyleWithID(oRide.affectedLayer.sharedStyleId));
     }
     else{
-      logger('126: t=layerStyle and document.getSharedLayerStyleWithID(appliedLStyle).name !=invisible');
+      logger('128: t=layerStyle and document.getSharedLayerStyleWithID(appliedLStyle).name !=invisible');
       logger(document.getSharedLayerStyleWithID(appliedLStyle).name);//this is still undefined some times
       logger('this is the symbol')
       logger(symbol);
@@ -146,14 +148,14 @@ function trackSymbols(symbol, t, oRide){
       var shownTextStyle;
       //STORE THE STYLE DEFINITIONS FROM THE SYMBOL'S MASTER LIBRARY
       var textStylesReferences=originLibrary.getImportableTextStyleReferencesForDocument(document);
-      logger('152: the shared text styles associated with the master of the current symbol are: '); 
+      logger('151: the shared text styles associated with the master of the current symbol are: '); 
       //LOOP THROUGH ALL THE SHARED STYLES FOR THIS SYMBOL IN THE MASTER LIBRARY
       textStylesReferences.forEach(function(ts){
         ts.import(); 
         var sharedTStyle = document.getSharedTextStyleWithID(ts.id);
         logger(sharedTStyle);
-        //SINCE ls.id FAILED AT TIMES, DIRECTLY ASSIGNING THE STYLE WORKS. Can we bypass the above line?
-        if(sharedTStyle==undefined){sharedTStyle = ls};
+        //SINCE (l)ts.id FAILED AT TIMES, DIRECTLY ASSIGNING THE STYLE WORKS. Can we bypass the above line?
+        if(sharedTStyle==undefined){sharedTStyle = ts};
         logger(sharedTStyle);
         if (sharedTStyle.name==shownTextStyleValue){
           //TRAP THE SHARED STYLE FOR OVERLAY
