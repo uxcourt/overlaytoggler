@@ -174,7 +174,7 @@ function trackSymbols(symbol, t, oRide){
     }//close if t==textStyle
   }//close trackSymbols function
 
-} close export
+} //close export
 
 function logger(stuff){
   if (debug==true){
