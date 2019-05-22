@@ -13,7 +13,7 @@ const overrideTextName='o.className';
 for (var a=0;a<document.selectedPage.layers.length;a++){
   findTheSymbols(document.selectedPage.layers[a].layers);
 }
-
+sketch.UI.message('Toggle Symbol Overlays completed. ' + document.selectedPage.layers.length + ' symbols evaluated.' );
 function findTheSymbols(layers){
   for(var i=0;i<layers.length;i++){
     if(layers[i].type=='SymbolInstance'){
