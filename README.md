@@ -1,7 +1,11 @@
 # symbol-overlay-toggle
 
+## Toggle Symbol Overlays
+This Sketch plug-in seeks specifically named overrides for symbols sourced from a master library, and toggles a style setting to make those overrides visible or hidden. We use it to embed meaningful development spec information invisibly within Sketch symbols, and turn on the overlays when we pass the comps off to developers. Think of it as custom redlines, which describe the CSS properties necessary to achieve the result within an established code library. Instead of specifying each atomic formatting value, we give the style a name. This plug in will allow you to store those style names as overlays on the symbols and toggle them on or off with a click on the menu.
+
 ## Installation
 
+- Myu current corporate firewall blocks skpm from creating this download. Best to just copy the source code of "src/my-command.js" and "src/manifest.json" into your own local copies and run SKPM there. As soon as I can configure publication to get through my workplace firewall, I'll publish and update these instructions.
 - [Download](../../releases/latest/download/symbol-overlay-toggle.sketchplugin.zip) the latest release of the plugin
 - Un-zip
 - Double-click on symbol-overlay-toggle.sketchplugin
