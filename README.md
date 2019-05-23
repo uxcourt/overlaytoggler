@@ -5,7 +5,6 @@ This Sketch plug-in seeks specifically named overrides for symbols sourced from 
 
 ## Installation
 
-- Myu current corporate firewall blocks skpm from creating this download. Best to just copy the source code of "src/my-command.js" and "src/manifest.json" into your own local copies and run SKPM there. As soon as I can configure publication to get through my workplace firewall, I'll publish and update these instructions.
 - [Download](../../releases/latest/download/symbol-overlay-toggle.sketchplugin.zip) the latest release of the plugin
 - Un-zip
 - Double-click on symbol-overlay-toggle.sketchplugin
