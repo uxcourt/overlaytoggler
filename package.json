@@ -1,7 +1,7 @@
 {
   "name": "symbol-overlay-toggle",
   "description": "A Sketch plug-in to seek specific style names in library-sourced symbols and toggle the styles.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "engines": {
     "sketch": ">=49.0"
   },
@@ -23,8 +23,8 @@
   "devDependencies": {
     "@skpm/builder": "^0.5.11"
   },
-  "repository" : {
-  	"type": "git",
-  	"url": "git+https://github.com/uxcourt/overlaytoggler.git"  }
-
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uxcourt/overlaytoggler.git"
+  }
 }
