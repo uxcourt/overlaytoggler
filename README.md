@@ -3,7 +3,7 @@
 ## Toggle Symbol Overlays
 This Sketch plug-in seeks specifically named overrides for symbols sourced from a master library, and toggles a style setting to make those overrides visible or hidden. We use it to embed meaningful development spec information invisibly within Sketch symbols, and turn on the overlays when we pass the comps off to developers. Think of it as custom redlines, which describe the CSS properties necessary to achieve the result within an established code library. Instead of specifying each atomic formatting value, we give the style a name. This plug in will allow you to store those style names as overlays on the symbols and toggle them on or off with a click on the menu.
 
-##Usage
+## Usage
 This looks in a linked symbol library for layer styles named "o.overlay" and "o.invisible", and for text styles named "o.className hidden" and "o.className shown". If it finds a symbol on the current page which has an override affected layer named "o.overlay", it will apply the opposite layer style (if currently o.invisible, flip the style to o.overlay). If it finds a symbol on the current page which has an override addected layer named o.className, it will similarly flip that style.
 
 One bug in the current build is that, once per file, you must manually apply the styles from the library to your local file. 
