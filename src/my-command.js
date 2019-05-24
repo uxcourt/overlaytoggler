@@ -10,12 +10,14 @@ const hiddenTextStyleValue='o.className hidden';
 const shownTextStyleValue='o.className shown';
 const overrideLayerName='o.overlay';
 const overrideTextName='o.className';
+var symCount=0;
 for (var a=0;a<document.selectedPage.layers.length;a++){
   findTheSymbols(document.selectedPage.layers[a].layers);
 }
-sketch.UI.message('Toggle Symbol Overlays completed. ' + document.selectedPage.layers.length + ' symbols evaluated.' );
+sketch.UI.message('Toggle Symbol Overlays completed. ' + symCount + ' symbols evaluated.' );
 function findTheSymbols(layers){
   for(var i=0;i<layers.length;i++){
+  	symCount=symCount+1;
     if(layers[i].type=='SymbolInstance'){
       logger('=====================NEW SYMBOL==========================');
       logger('=========================================================')

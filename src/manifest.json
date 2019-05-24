@@ -1,18 +1,20 @@
 {
   "compatibleVersion": 3,
   "bundleVersion": 1,
+  "author": "Premera Design",
   "icon": "icon.png",
   "commands": [
     {
       "name": "Toggle Symbol Overlays",
-      "identifier": "symbol-overlay-toggle.my-command-identifier",
+      "identifier": "symbol-overlay-toggle.toggle",
+      "shortcut": "cmd ctrl o",
       "script": "my-command.js"
     }
   ],
   "menu": {
     "title": "Toggle Symbol Overlays",
     "items": [
-      "symbol-overlay-toggle.my-command-identifier"
+      "symbol-overlay-toggle.toggle"
     ],
     "isRoot":true
   },
@@ -21,5 +23,5 @@
   "name": "symbol-overlay-toggle",
   "identifier": "symbol-overlay-toggle",
   "disableCocoaScriptPreprocessor": true,
-  "appcast": "https://raw.githubusercontent.com//master/.appcast.xml"
+  "appcast": "https://github.com/uxcourt/overlaytoggler/blob/master/.appcast.xml"
 }
