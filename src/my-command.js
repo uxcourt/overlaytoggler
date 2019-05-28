@@ -38,6 +38,11 @@ function findTheSymbols(layers){
         }//o.className if
         }//j loop
       }//endif symbol instance 
+      if(layers[i].layers && layers[i].layers.length){
+        logger('you found a group named: ' + layers[i].name);
+        logger('It has this layers.length: ' + layers[i].layers.length)
+        layers[i].layers.forEach(findTheSymbols(layers[i].layers));//recursion to support infinite nesting
+      }
   }//i loop
 }//findTheSymbols
 
