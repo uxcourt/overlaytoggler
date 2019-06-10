@@ -2,6 +2,7 @@ var debug;
 debug=false;
 
 export default function(){
+
 var sketch = require('sketch');
 var document = sketch.getSelectedDocument();
 const hiddenLayerStyleValue='invisible';
@@ -11,51 +12,54 @@ const shownTextStyleValue='o.className shown';
 const overrideLayerName='o.overlay';
 const overrideTextName='o.className';
 var symCount=0;
+
 for (var a=0;a<document.selectedPage.layers.length;a++){
-  findTheSymbols(document.selectedPage.layers[a].layers);
+  findTheSymbols(document.selectedPage.layers[a]);
 }
 sketch.UI.message('Toggle Symbol Overlays completed. ' + symCount + ' symbols evaluated.' );
-function findTheSymbols(layers){
-  for(var i=0;i<layers.length;i++){
-  	symCount=symCount+1;
-    if(layers[i].type=='SymbolInstance'){
-      logger('=====================NEW SYMBOL==========================');
-      logger('=========================================================')
-      logger('found a symbol named ' + layers[i].name);
-      logger('it has ' + layers[i].overrides.length +' overrides');
-      for(var j=0;j<layers[i].overrides.length;j++){
-        logger('the affected layer for override '+ j + ' is ' + layers[i].overrides[j].affectedLayer.name)
-        logger('before testing if the layername is o.overlay or o.classname, the value for the override is: ');
-        logger(layers[i].overrides[j].value);
-        //LOOK AT THE SYMBOLS WITH O.OVERLAY LAYERS
-        if(layers[i].overrides[j].affectedLayer.name==overrideLayerName){
-          trackSymbols(layers[i],'layerStyle', layers[i].overrides[j]);
-        }//close o.overlay if
-        //LOOK AT THE SYMBOLS WITH O.CLASSNAME LAYERS
-        if(layers[i].overrides[j].affectedLayer.name==overrideTextName){
-          //IF YOU FIND A HIDDEN TEXT CLASS, log it
-          trackSymbols(layers[i], 'textStyle', layers[i].overrides[j]);
-        }//o.className if
-        }//j loop
-      }//endif symbol instance 
-      if(layers[i].layers && layers[i].layers.length){
-        logger('you found a group named: ' + layers[i].name);
-        logger('It has this layers.length: ' + layers[i].layers.length)
-        layers[i].layers.forEach(findTheSymbols(layers[i].layers));//recursion to support infinite nesting
-      }
-  }//i loop
+
+function findTheSymbols(layer){
+  //when called in recursion, .length might be 0 and this loop never executes
+  symCount=symCount+1;
+  if(layer.type=='SymbolInstance'){
+    logger('=====================NEW SYMBOL==========================');
+    logger('=========================================================')
+    logger('found a symbol named ' + layer.name);
+    logger('it has ' + layer.overrides.length +' overrides');
+    for(var j=0;j<layer.overrides.length;j++){
+      logger('the affected layer for override '+ j + ' is ' + layer.overrides[j].affectedLayer.name)
+      logger('before testing if the layername is o.overlay or o.classname, the value for the override is: ');
+      logger(layer.overrides[j].value);
+      //LOOK AT THE SYMBOLS WITH O.OVERLAY LAYERS
+      if(layer.overrides[j].affectedLayer.name==overrideLayerName){
+        trackSymbols(layer,'layerStyle', layer.overrides[j]);
+      }//close o.overlay if
+      //LOOK AT THE SYMBOLS WITH O.CLASSNAME LAYERS
+      if(layer.overrides[j].affectedLayer.name==overrideTextName){
+        //IF YOU FIND A HIDDEN TEXT CLASS, log it
+        trackSymbols(layer, 'textStyle', layer.overrides[j]);
+      }//o.className if
+      }//j loop
+    }//endif symbol instance 
+    if(layer.layers && layer.layers.length){
+      logger('you found a group named: ' + layer.name);
+      logger('It has this layers.length: ' + layer.layers.length)
+      layer.layers.forEach(function(item, x){findTheSymbols(item)});
+
+    }//endif layer.layers
+  
 }//findTheSymbols
 
-//would this be faster? var layers = sharedStyle.getAllInstancesLayers()
 
 function trackSymbols(symbol, t, oRide){
   //FIND THE MASTER OF THE CURRENT SYMBOL
   var sMaster=symbol.master;
   logger('================================================================================')
-  logger('48: in trackSymbols function, the master for the passed-in symbol is:')
+  logger('58: in trackSymbols function, the master for the passed-in symbol is:')
   logger(sMaster);
   //GET THE MASTER'S LIBRARY
   var originLibrary=sMaster.getLibrary();
+  if(originLibrary==undefined){return}//you're on a local symbol, so exit the function
   logger('originLibrary: ');
   logger(originLibrary);
   logger('symbol.id: '+ symbol.id);
@@ -95,7 +99,7 @@ function trackSymbols(symbol, t, oRide){
   }//close the if undefined block
 
   if(t=='layerStyle'){
-    logger('91: the shared layer style associated with the current value of the current override is:')
+    logger('101: the shared layer style associated with the current value of the current override is:')
     logger(appliedLStyle);
     logger(document.getSharedLayerStyleWithID(appliedLStyle).name);
     //CREATE STORAGE FOR HIDDEN AND SHOWN VARIANTS OF THE STYLE
@@ -110,7 +114,7 @@ function trackSymbols(symbol, t, oRide){
       var sharedLStyle = document.getSharedLayerStyleWithID(ls.id);
       //SINCE ls.id FAILED AT TIMES, DIRECTLY ASSIGNING THE STYLE WORKS. Can we bypass the above line?
       if(sharedLStyle==undefined){sharedLStyle = ls};
-      logger(sharedLStyle);
+      //logger(sharedLStyle);
       if (sharedLStyle.name==shownLayerStyleValue){
         //TRAP THE SHARED STYLE FOR OVERLAY
         shownLayerStyle=sharedLStyle;
@@ -123,7 +127,7 @@ function trackSymbols(symbol, t, oRide){
     //LOOK AT THE APPLIED STYLE ON THE SYMBOL YOU'RE WORKING WITH
     if(document.getSharedLayerStyleWithID(appliedLStyle).name==hiddenLayerStyleValue){
       //FLIP INVISIBLE TO OVERLAY
-      logger('119: this is oRide if appliedLStyle.name==invisible');
+      logger('129: this is oRide if appliedLStyle.name==invisible');
       logger(oRide);
       logger('this is shownLayerStyle if appliedLStyle.name==invisible');
       logger(shownLayerStyle);
@@ -132,7 +136,7 @@ function trackSymbols(symbol, t, oRide){
       logger(document.getSharedLayerStyleWithID(oRide.affectedLayer.sharedStyleId));
     }
     else{
-      logger('128: t=layerStyle and document.getSharedLayerStyleWithID(appliedLStyle).name !=invisible');
+      logger('138: t=layerStyle and document.getSharedLayerStyleWithID(appliedLStyle).name !=invisible');
       logger(document.getSharedLayerStyleWithID(appliedLStyle).name);//this is still undefined some times
       logger('this is the symbol')
       logger(symbol);
@@ -155,15 +159,15 @@ function trackSymbols(symbol, t, oRide){
       var shownTextStyle;
       //STORE THE STYLE DEFINITIONS FROM THE SYMBOL'S MASTER LIBRARY
       var textStylesReferences=originLibrary.getImportableTextStyleReferencesForDocument(document);
-      logger('151: the shared text styles associated with the master of the current symbol are: '); 
+      //logger('161: the shared text styles associated with the master of the current symbol are: '); 
       //LOOP THROUGH ALL THE SHARED STYLES FOR THIS SYMBOL IN THE MASTER LIBRARY
       textStylesReferences.forEach(function(ts){
         ts.import(); 
         var sharedTStyle = document.getSharedTextStyleWithID(ts.id);
-        logger(sharedTStyle);
+        //logger(sharedTStyle);
         //SINCE (l)ts.id FAILED AT TIMES, DIRECTLY ASSIGNING THE STYLE WORKS. Can we bypass the above line?
         if(sharedTStyle==undefined){sharedTStyle = ts};
-        logger(sharedTStyle);
+        //logger(sharedTStyle);
         if (sharedTStyle.name==shownTextStyleValue){
           //TRAP THE SHARED STYLE FOR OVERLAY
           shownTextStyle=sharedTStyle;
