@@ -18,8 +18,8 @@
     ],
     "isRoot":true
   },
-  "version": "0.1.0",
-  "description": "",
+  "version": "3.1.0",
+  "description": "Find library-sourced symbols in the current page and render an overlay on them.",
   "name": "symbol-overlay-toggle",
   "identifier": "symbol-overlay-toggle",
   "disableCocoaScriptPreprocessor": true,

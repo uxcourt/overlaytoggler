@@ -27,7 +27,7 @@ else{//if there were 0 overlays
     var sM=symbolS[b].getAllInstances();
     for(var sMc=0;sMc<sM.length;sMc++){
       //limit the script to the current page just to save time
-      //if a symbol has no parentpage, it is not placed on a non-symbol page: skip it
+      //if a symbol has no parentpage, skip it
       if(sM[sMc].getParentPage()==undefined){return};
       if(sM[sMc].getParentPage().id==document.selectedPage.id){
         findTheSymbols(sM[sMc]);
@@ -41,18 +41,8 @@ logger('Ending symbol-overlay-toggler: '+ Date.now());
 
 function findTheSymbols(layer){
 	symCount=symCount+1;
-  // //recurse if the current layer is a group
-  // if(layer.layers && layer.layers.length){
-  //   logger('====================A GROUP==============================');
-  //   // logger('It has this layers.length: ' + layer.layers.length)
-  //   //recursion
-  //   layer.layers.forEach(function(item, x){console.log(item);findTheSymbols(item)});
-
-  // }//endif layer.layers
-  //test if the current layer is a symbol
+  //test if the current layer is a symbol instance
   if(layer.type=='SymbolInstance'){
-    logger('=====================NEW SYMBOL==========================');
-    // logger('=========================================================')
     var sMaster=layer.master;
     var originLibrary=sMaster.getLibrary();
     if(originLibrary==undefined){return}//you're on a local symbol, so exit the function
@@ -80,7 +70,7 @@ function createOverlay(layer){
     parent:layer.parent,
     frame:layer.frame
   })
-  //text.style.verticalAlignment='center';
+  //text.style.verticalAlignment='center'//doesn't work;
   text.style.textColor=borderStyle;
   logger('Created overlays for '+layer);
 }//close createOverlay function
