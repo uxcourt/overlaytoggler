@@ -12,7 +12,7 @@ If you're curious about how it works, download the source file and edit the scri
 
 ## Installation
 
-- [Download](../../releases/latest/download/symbol-overlay-toggle.sketchplugin) the latest release of the plugin
+- [Download](../../releases/download/v3.0.0/symbol-overlay-toggler.sketchplugin.zip) the latest release of the plugin
 - Un-zip
 - Double-click on symbol-overlay-toggle.sketchplugin
 
