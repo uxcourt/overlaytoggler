@@ -1,7 +1,7 @@
 {
   "name": "symbol-overlay-toggle",
   "description": "Find library-sourced symbols in the current page and render an overlay on them.",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "engines": {
     "sketch": ">=49.0"
   },
