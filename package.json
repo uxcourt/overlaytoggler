@@ -1,7 +1,7 @@
 {
   "name": "symbol-overlay-toggle",
   "description": "A Sketch plug-in to seek specific style names in library-sourced symbols and toggle the styles.",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "engines": {
     "sketch": ">=49.0"
   },
