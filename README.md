@@ -1,10 +1,10 @@
 # symbol-overlay-toggle
 
 ## Toggle Symbol Overlays
-This Sketch plug-in seeks symbols sourced from a master library, and toggles an overlay layer and the name of the symbol. We turn on the overlays when we pass the comps off to developers. Think of it as custom redlines, which describe the CSS properties necessary to achieve the result within an established code library. Instead of specifying each atomic formatting value, we give the style a name and make that name the name of the symbol. 
+This Sketch plug-in seeks symbols sourced from an external Sketch library, and creates an overlay layer and the name of the symbol. Think of it as custom redlines, which use the symbol name as a shortcut to the code instructions referring to an established library component. Instead of specifying each atomic formatting value, we give the style a name and make that name the name of the symbol. 
 
 ## Usage
-Install it and run it. If there are any layers named "o.overlay", it will find them and delete them. If no o.overlay layers are found, it will find all library-sourced symbols on the page. "o.overlay", as well as the colors of the overlay, are configurable by changing the constants in the source code.
+Install it and run it. If there are any layers named "o.overlay", it will find them and delete them. If no "o.overlay" layers are found, it will find all library-sourced symbols on the page. "o.overlay", as well as the colors of the overlay, are configurable by changing the constants in the source code.
 
 The script only operates on the current page of your Sketch file.
 
